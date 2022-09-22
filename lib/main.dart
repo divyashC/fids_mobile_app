@@ -36,8 +36,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   final List<Widget> _children = [
     const HomePage(),
     const SearchPage(),
-    const InfoPage(),
     const ReminderPage(),
+    const InfoPage(),
   ];
 
   void onTappedBar(int index) {
