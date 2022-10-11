@@ -10,14 +10,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: const Text('FLIGHT SCHEDULE'),
-    //     centerTitle: true,
-    //     backgroundColor: Colors.red,
-    //   ),
-    // );
-    // rewrite the below code by adding a appbar at the top and positioning the sized box at top margin 240 and left margin 30
     return Scaffold(
         appBar: AppBar(
           title: const Text('FLIGHT SCHEDULE'),
