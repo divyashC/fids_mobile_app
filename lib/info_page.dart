@@ -26,7 +26,7 @@ class _InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('INFO'),
+          title: const Text('FAQs'),
           centerTitle: true,
           backgroundColor: Colors.red,
         ),
