@@ -1,13 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class art extends StatelessWidget {
-  const art({super.key});
+  const art(
+      {super.key,
+      required int size,
+      required EdgeInsets padding,
+      required int width});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+      padding: const EdgeInsets.only(top: 4, left: 4, right: 4, bottom: 4),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),

@@ -42,7 +42,11 @@ class _HomePageState extends State<HomePage> {
               return GestureDetector(
                 onTap: () {},
                 child: Card(
-                    color: Color.fromARGB(255, 242, 242, 242),
+                    color: Color.fromARGB(255, 243, 236, 232),
+                    //make round edge
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
                     child: Row(
                       children: [
                         Container(
@@ -60,42 +64,58 @@ class _HomePageState extends State<HomePage> {
                                 style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
-                              padding:
-                                  const EdgeInsets.only(top: 30, bottom: 40),
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 20, bottom: 40, right: 30),
                             ),
+
                             Container(
                               child: Text(
                                 departure[index],
                                 style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
-                              padding:
-                                  const EdgeInsets.only(top: 30, bottom: 10),
+                              padding: const EdgeInsets.only(
+                                  top: 30, bottom: 10, right: 30),
                             ),
-
                             //padding
                             Container(
                               child: Text(
                                 origin[index],
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 10, fontWeight: FontWeight.bold),
                               ),
-                              padding:
-                                  const EdgeInsets.only(left: 10, bottom: 40),
+                              padding: const EdgeInsets.only(
+                                  left: 10, bottom: 40, right: 30),
                             ),
                           ],
                         ),
+                        Expanded(child: Container()),
+                        const art(
+                            width: 0, padding: EdgeInsets.all(40), size: 20),
+                        Expanded(
+                            child: SizedBox(
+                          height: 20,
+                          child: Flex(
+                            direction: Axis.horizontal,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: List.generate(
+                              5,
+                              (index) => const Text("-"),
+                            ),
+                          ),
+                        )),
                         Column(
                           children: <Widget>[
                             Container(
                               child: Text(
                                 flightDuration[index],
                                 style: const TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 13,
+                                  fontFamily: 'a charming font',
                                 ),
                               ),
                               padding: const EdgeInsets.only(
-                                  left: 50, top: 30, bottom: 50),
+                                  left: 0, top: 30, bottom: 50),
                             ),
                             Container(
                               child: Text(
@@ -104,10 +124,15 @@ class _HomePageState extends State<HomePage> {
                                   fontSize: 15,
                                 ),
                               ),
-                              padding: const EdgeInsets.only(left: 40),
+                              padding:
+                                  const EdgeInsets.only(left: 0, bottom: 30),
                             ),
                           ],
                         ),
+                        const art(
+                            width: 2,
+                            padding: const EdgeInsets.all(2),
+                            size: 2),
                         Column(
                           children: <Widget>[
                             Container(
@@ -124,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                                 style: const TextStyle(
                                     fontSize: 10, fontWeight: FontWeight.bold),
                               ),
-                              padding: const EdgeInsets.only(left: 60, top: 10),
+                              padding: const EdgeInsets.only(left: 40, top: 10),
                             ),
                           ],
                         )
