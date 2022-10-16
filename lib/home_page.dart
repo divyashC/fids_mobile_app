@@ -1,4 +1,7 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'package:flutter/material.dart';
+import 'art.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,11 +25,14 @@ class _HomePageState extends State<HomePage> {
     "assets/images/bhutan_airlines_logo.png"
   ];
 
+  // Icon cusIcon = Icon(Icons.menu);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('FLIGHT SCHEDULE'),
+          elevation: 0,
           centerTitle: true,
           backgroundColor: Colors.red,
         ),
@@ -35,15 +41,95 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {},
-                child: Card(Row(
-                  children: <Widget>[
-                    Container(
-                      width: 100,
-                      height: 100,
-                      child: Image.asset(imgList[index]),
-                    ),
-                  ],
-                )),
+                child: Card(
+                    color: Color.fromARGB(255, 242, 242, 242),
+                    child: Row(
+                      children: [
+                        Container(
+                          child: Image.asset(
+                            imgList[index],
+                            fit: BoxFit.cover,
+                          ),
+                          // ignore: prefer_const_constructors
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              child: Text(
+                                flightNumber[index],
+                                style: const TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                              padding:
+                                  const EdgeInsets.only(top: 30, bottom: 40),
+                            ),
+                            Container(
+                              child: Text(
+                                departure[index],
+                                style: const TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                              padding:
+                                  const EdgeInsets.only(top: 30, bottom: 10),
+                            ),
+
+                            //padding
+                            Container(
+                              child: Text(
+                                origin[index],
+                                style: TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.bold),
+                              ),
+                              padding:
+                                  const EdgeInsets.only(left: 10, bottom: 40),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              child: Text(
+                                flightDuration[index],
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              padding: const EdgeInsets.only(
+                                  left: 50, top: 30, bottom: 50),
+                            ),
+                            Container(
+                              child: Text(
+                                date[index],
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              padding: const EdgeInsets.only(left: 40),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              child: Text(
+                                arrival[index],
+                                style: const TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                              padding: const EdgeInsets.only(left: 40, top: 70),
+                            ),
+                            Container(
+                              child: Text(
+                                destination[index],
+                                style: const TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.bold),
+                              ),
+                              padding: const EdgeInsets.only(left: 60, top: 10),
+                            ),
+                          ],
+                        )
+                      ],
+                    )),
               );
             }));
   }

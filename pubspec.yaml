@@ -57,9 +57,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-assets:
-  - "assets/images/bhutan_airlines_logo.png"
-  - "assets/images/druk_air_logo.png"
+  assets:
+    - assets/images/
+ 
 
   # To add assets to your application, add an assets section, like this:
   # assets:
