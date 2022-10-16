@@ -3,6 +3,7 @@ import 'package:fids_mobile_app/home_page.dart';
 import 'package:fids_mobile_app/search_page.dart';
 import 'package:fids_mobile_app/info_page.dart';
 import 'package:fids_mobile_app/reminder_page.dart';
+import 'package:fids_mobile_app/routes_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,6 +37,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   final List<Widget> _children = [
     const HomePage(),
     const SearchPage(),
+    const RoutesPage(),
     const ReminderPage(),
     const InfoPage(),
   ];
@@ -67,6 +69,13 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               child: Icon(Icons.search),
             ),
             label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: EdgeInsets.only(bottom: 5, top: 12),
+              child: Icon(Icons.location_on),
+            ),
+            label: 'Routes',
           ),
           BottomNavigationBarItem(
             // reminders bell icon
