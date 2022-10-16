@@ -38,11 +38,13 @@ class _HomePageState extends State<HomePage> {
             itemCount: flightNumber.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  print(flightNumber[index]);
+                },
                 child: Card(
                     color: Color.fromARGB(255, 243, 236, 232),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(90),
                     ),
                     child: Row(
                       children: [
