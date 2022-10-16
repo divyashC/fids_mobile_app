@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                 child: Card(
                     color: Color.fromARGB(255, 243, 236, 232),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(90),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                     child: Row(
                       children: [
