@@ -24,18 +24,16 @@ class _HomePageState extends State<HomePage> {
     "assets/images/bhutan_airlines_logo.png",
     "assets/images/bhutan_airlines_logo.png"
   ];
-
-  // Icon cusIcon = Icon(Icons.menu);
+  var schedule_img = "assets/images/path.png";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('FLIGHT SCHEDULE'),
-          elevation: 0,
-          centerTitle: true,
-          backgroundColor: Colors.red,
-        ),
+            title: const Text('FLIGHT SCHEDULE'),
+            elevation: 0,
+            centerTitle: true,
+            backgroundColor: Colors.red),
         body: ListView.builder(
             itemCount: flightNumber.length,
             itemBuilder: (context, index) {
@@ -43,7 +41,6 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {},
                 child: Card(
                     color: Color.fromARGB(255, 243, 236, 232),
-                    //make round edge
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
@@ -54,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                             imgList[index],
                             fit: BoxFit.cover,
                           ),
-                          // ignore: prefer_const_constructors
+                          padding: const EdgeInsets.only(top: 35, bottom: 125),
                         ),
                         Column(
                           children: <Widget>[
@@ -65,9 +62,8 @@ class _HomePageState extends State<HomePage> {
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                               padding: const EdgeInsets.only(
-                                  left: 10, top: 20, bottom: 40, right: 30),
+                                  left: 10, top: 30, bottom: 40, right: 30),
                             ),
-
                             Container(
                               child: Text(
                                 departure[index],
@@ -75,9 +71,8 @@ class _HomePageState extends State<HomePage> {
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                               padding: const EdgeInsets.only(
-                                  top: 30, bottom: 10, right: 30),
+                                  top: 0, bottom: 10, right: 30),
                             ),
-                            //padding
                             Container(
                               child: Text(
                                 origin[index],
@@ -89,21 +84,6 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        Expanded(child: Container()),
-                        const art(
-                            width: 0, padding: EdgeInsets.all(40), size: 20),
-                        Expanded(
-                            child: SizedBox(
-                          height: 20,
-                          child: Flex(
-                            direction: Axis.horizontal,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(
-                              5,
-                              (index) => const Text("-"),
-                            ),
-                          ),
-                        )),
                         Column(
                           children: <Widget>[
                             Container(
@@ -129,10 +109,20 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        const art(
-                            width: 2,
-                            padding: const EdgeInsets.all(2),
-                            size: 2),
+                        Row(
+                          children: <Widget>[
+                            Container(
+                              width: 50,
+                              height: 100,
+                              child: Image.asset(
+                                schedule_img,
+                                fit: BoxFit.cover,
+                              ),
+                              padding: const EdgeInsets.only(
+                                  right: 10, left: 0, top: 30, bottom: 50),
+                            ),
+                          ],
+                        ),
                         Column(
                           children: <Widget>[
                             Container(
