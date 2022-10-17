@@ -121,7 +121,7 @@ class _ReminderPageState extends State<ReminderPage> {
                   Container(
                     margin: const EdgeInsets.only(left: 100),
                     child: Switch(
-                      value: true,
+                      value: false,
                       onChanged: (value) {},
                       activeTrackColor: Colors.redAccent,
                       activeColor: Colors.red,
