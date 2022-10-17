@@ -23,31 +23,39 @@ class _SearchPageState extends State<SearchPage> {
         body: ListView(children: <Widget>[
           Container(
               height: 160,
-              margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+              margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 30.0),
               child: Column(children: [
                 Container(
-                  margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                  margin: const EdgeInsets.only(top: 20, left: 5, right: 5),
+                  padding: const EdgeInsets.only(left: 20),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.red)),
                   child: const TextField(
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      border: InputBorder.none,
                       labelText: 'Search Flights...',
                     ),
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                  margin: const EdgeInsets.only(top: 20, left: 5, right: 5),
                   child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15))),
                       child:
-                          const Text('Search', style: TextStyle(fontSize: 16)),
+                          const Text('Search', style: TextStyle(fontSize: 18)),
                     ),
                   ),
                 ),
               ])),
           Container(
-            margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 30.0),
+            margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 50.0),
             padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
             decoration: const BoxDecoration(
               color: Color.fromARGB(255, 243, 236, 232),
