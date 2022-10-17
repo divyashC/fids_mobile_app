@@ -87,6 +87,8 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController textController = TextEditingController();
+    String searchQuery;
     return Scaffold(
         appBar: AppBar(
           title: const Text('SEARCH FLIGHTS'),
@@ -104,8 +106,9 @@ class _SearchPageState extends State<SearchPage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.red)),
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextField(
+                    controller: textController,
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
                       labelText: 'Search Flights...',
                     ),
@@ -116,7 +119,19 @@ class _SearchPageState extends State<SearchPage> {
                   child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          if (textController.text != "") {
+                            searchQuery = textController.text;
+                            api =
+                                "https://localhost:7178/api/FlightAPI/search/$searchQuery";
+                            futureData = fetchData();
+                          } else {
+                            api = "https://localhost:7178/api/FlightAPI";
+                            futureData = fetchData();
+                          }
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
                           shape: RoundedRectangleBorder(
