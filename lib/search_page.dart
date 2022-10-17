@@ -101,7 +101,7 @@ class _SearchPageState extends State<SearchPage> {
                         pathImg,
                         fit: BoxFit.cover,
                         height: 25,
-                        width: 100,
+                        width: 90,
                       ),
                     ),
                     // ignore: prefer_const_literals_to_create_immutables
