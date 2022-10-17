@@ -60,7 +60,7 @@ class _ReminderPageState extends State<ReminderPage> {
               Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(left: 100),
+                    margin: const EdgeInsets.only(left: 90),
                     child: Switch(
                       value: true,
                       onChanged: (value) {},
@@ -119,7 +119,7 @@ class _ReminderPageState extends State<ReminderPage> {
               Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(left: 100),
+                    margin: const EdgeInsets.only(left: 90),
                     child: Switch(
                       value: false,
                       onChanged: (value) {},

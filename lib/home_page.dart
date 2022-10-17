@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                       margin: const EdgeInsets.only(left: 10.0, top: 10.0),
                       child: Image.asset(
                         drukAirLogo,
-                        fit: BoxFit.contain,
+                        fit: BoxFit.fill,
                       ),
                     ),
                     Container(
