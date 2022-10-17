@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fids_mobile_app/home_page.dart';
 import 'package:fids_mobile_app/search_page.dart';
@@ -6,6 +8,7 @@ import 'package:fids_mobile_app/reminder_page.dart';
 import 'package:fids_mobile_app/routes_page.dart';
 
 void main() {
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }
 
@@ -102,5 +105,14 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         type: BottomNavigationBarType.fixed,
       ),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
