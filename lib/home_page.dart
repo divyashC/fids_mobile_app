@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'package:fids_mobile_app/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:intl/intl.dart';
+// import 'package:fids_mobile_app/reminder_page.dart';
 
 Future<List<Data>> fetchData() async {
   final response =
@@ -83,11 +85,15 @@ class _HomePageState extends State<HomePage> {
   String _hours = '';
   String _mins = '';
   String _secs = '';
+
   late Future<List<Data>> futureData;
+  late final NotificationService notifService;
 
   @override
   void initState() {
     super.initState();
+    notifService = NotificationService();
+    notifService.initialize();
     futureData = fetchData();
     _timeString = _formatDateTime(DateTime.now());
     Timer.periodic(const Duration(seconds: 1), (Timer t) => _getTime());
@@ -223,7 +229,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                             ),
-                            height: 220,
+                            height: 250,
                             child: Column(
                               children: [
                                 Row(
@@ -311,8 +317,7 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                                 Container(
-                                  margin: const EdgeInsets.only(
-                                      bottom: 20, top: 20),
+                                  margin: const EdgeInsets.only(top: 20),
                                   child: Text(
                                       data[index]
                                           .flightDate
@@ -320,12 +325,131 @@ class _HomePageState extends State<HomePage> {
                                           .substring(0, 10),
                                       style: const TextStyle(fontSize: 15)),
                                 ),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 290),
+                                  child: IconButton(
+                                    // icon size
+                                    iconSize: 32,
+                                    icon: const Icon(Icons.notifications,
+                                        color: Colors.red),
+                                    onPressed: () async {
+                                      await notifService.scheduleNotification(
+                                        id: 1,
+                                        title: 'Flight Reminder',
+                                        body:
+                                            '${data[index].originIata} - ${data[index].origin} to ${data[index].destinationIata} - ${data[index].destination}\nDeparture - ${data[index].departureTime.toString().substring(0, 5)}',
+                                        // scheduledDate: DateTime(
+                                        //     2022, 10, 19, 00, 47, 30));
+                                        scheduledDate: DateTime(
+                                            int.parse(data[index]
+                                                .flightDate
+                                                .toString()
+                                                .substring(0, 4)),
+                                            int.parse(data[index]
+                                                .flightDate
+                                                .toString()
+                                                .substring(5, 7)),
+                                            int.parse(data[index]
+                                                .flightDate
+                                                .toString()
+                                                .substring(8, 10)),
+                                            int.parse(data[index]
+                                                .departureTime
+                                                .toString()
+                                                .substring(0, 2)),
+                                            int.parse(data[index]
+                                                .departureTime
+                                                .toString()
+                                                .substring(3, 5)),
+                                            00),
+                                      );
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              actionsPadding:
+                                                  const EdgeInsets.only(
+                                                      right: 20, bottom: 15),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 25,
+                                                      top: 10,
+                                                      right: 25,
+                                                      bottom: 15),
+                                              titlePadding:
+                                                  const EdgeInsets.only(
+                                                      left: 25, top: 25),
+                                              title: const Text(
+                                                  'FIDS Reminder Set'),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                              ),
+                                              content: Text(
+                                                  'Date - ${data[index].flightDate.toString().substring(0, 10)} \nTime - ${data[index].departureTime.toString().substring(0, 5)} hrs \nFlight - ${data[index].originIata} - ${data[index].origin} to ${data[index].destinationIata} - ${data[index].destination}'),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    style: TextButton.styleFrom(
+                                                        backgroundColor:
+                                                            Colors.red,
+                                                        foregroundColor:
+                                                            Colors.white,
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 5,
+                                                                right: 5,
+                                                                top: 10,
+                                                                bottom: 10),
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15))),
+                                                    child: const Text('OK'))
+                                              ],
+                                            );
+                                          });
+
+                                      // await notifService.showNotification(
+                                      //     id: 0,
+                                      //     title: 'Flight Reminder',
+                                      //     body:
+                                      //         '${data[index].originIata} - ${data[index].origin} to ${data[index].destinationIata} - ${data[index].destination}\nDeparture - ${data[index].departureTime.toString().substring(0, 5)}',
+                                      // );
+
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           const ReminderPage()),
+                                      // );
+                                    },
+                                  ),
+                                ),
                               ],
                             ),
                           );
                         });
                   } else if (snapshot.hasError) {
-                    return Text("${snapshot.error}");
+                    // return Text("${snapshot.error}");
+                    return Container(
+                      margin: const EdgeInsets.only(
+                          left: 60, top: 40, right: 60, bottom: 350),
+                      padding: const EdgeInsets.only(
+                          top: 30, left: 25, right: 25, bottom: 10),
+                      child: const Text(
+                        'API Connection Refused',
+                        style: TextStyle(
+                          fontSize: 19.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
                   }
                   // By default show a loading spinner.
                   return const CircularProgressIndicator();

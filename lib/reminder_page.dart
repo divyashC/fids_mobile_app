@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 
 class ReminderPage extends StatefulWidget {
+  // final String departureTime;
+  // final String flightDate;
+  // final String airline;
+  // final String flightNumber;
+  // final String originIata;
+  // final String destinationIata;
+
+  // const ReminderPage(
+  //     {Key? key,
+  //     required this.departureTime,
+  //     required this.flightDate,
+  //     required this.airline,
+  //     required this.flightNumber,
+  //     required this.originIata,
+  //     required this.destinationIata})
+  //     : super(key: key);
   const ReminderPage({super.key});
 
   @override
@@ -8,6 +24,17 @@ class ReminderPage extends StatefulWidget {
 }
 
 class _ReminderPageState extends State<ReminderPage> {
+  var reminderData = [
+    {
+      "key": 1,
+      "departureTime": "08:30 AM",
+      "flightDate": "12/12/2000",
+      "airline": "Druk Air",
+      "flightNumber": "KB150",
+      "originIata": "PBH",
+      "destinationIata": "BKK"
+    }
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
