@@ -1,4 +1,3 @@
-// ignore_for_file: sort_child_properties_last
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -11,9 +10,8 @@ Future<List<Data>> fetchData() async {
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((data) => Data.fromJson(data)).toList();
-  } else {
-    throw Exception('Unexpected error occured!');
   }
+  return [];
 }
 
 class Data {
@@ -192,8 +190,28 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<Data>? data = snapshot.data;
+                    if (data!.isEmpty) {
+                      return Container(
+                        margin: const EdgeInsets.only(
+                            left: 100, top: 40, right: 100, bottom: 350),
+                        padding: const EdgeInsets.only(
+                            top: 30, left: 25, right: 20, bottom: 20),
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 243, 236, 232),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                        child: const Text(
+                          'No Flights Found',
+                          style: TextStyle(
+                            fontSize: 19.0,
+                            fontWeight: FontWeight.bold,
+                            // italics text style
+                          ),
+                        ),
+                      );
+                    }
                     return ListView.builder(
-                        itemCount: data?.length,
+                        itemCount: data.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
                             margin: const EdgeInsets.only(
@@ -214,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                                       margin: const EdgeInsets.only(
                                           left: 10.0, top: 10.0),
                                       child: Image.asset(
-                                        data?[index].airline == "Druk Air"
+                                        data[index].airline == "Druk Air"
                                             ? drukAirLogo
                                             : bhutanAirlinesLogo,
                                         fit: BoxFit.fill,
@@ -224,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                                         margin: const EdgeInsets.only(
                                             left: 20, top: 7),
                                         child: Text(
-                                          data![index].flightNo.toString(),
+                                          data[index].flightNo.toString(),
                                           style: const TextStyle(
                                               fontSize: 19.0,
                                               fontWeight: FontWeight.bold),
@@ -326,14 +344,10 @@ class _HomePageState extends State<HomePage> {
       _hours = _timeString.substring(11, 13);
       _mins = _timeString.substring(14, 16);
       _secs = _timeString.substring(17, 19);
-      _hours = _formatAmpm(now) == "PM"
+      _hours = DateFormat('a').format(now) == "PM"
           ? (int.parse(_hours) + 12).toString()
           : _hours;
     });
-  }
-
-  String _formatAmpm(DateTime dateTime) {
-    return DateFormat('a').format(dateTime);
   }
 
   String _formatDateTime(DateTime dateTime) {

@@ -64,7 +64,7 @@ class _ReminderPageState extends State<ReminderPage> {
                     child: Switch(
                       value: true,
                       onChanged: (value) {},
-                      activeTrackColor: Colors.redAccent,
+                      activeTrackColor: Colors.green.shade400,
                       activeColor: Colors.red,
                     ),
                   ),
