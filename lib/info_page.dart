@@ -35,13 +35,13 @@ class _InfoPageState extends State<InfoPage> {
               const EdgeInsets.only(left: 20, top: 20, bottom: 20, right: 20),
           child: ExpansionPanelList.radio(
             expandedHeaderPadding: (const EdgeInsets.all(20)),
-            animationDuration: const Duration(milliseconds: 200),
+            animationDuration: const Duration(milliseconds: 500),
             initialOpenPanelValue: 26,
             children: items
                 .map(
                   (item) => ExpansionPanelRadio(
                     canTapOnHeader: true,
-                    backgroundColor: Color.fromARGB(255, 238, 237, 237),
+                    backgroundColor: const Color.fromARGB(255, 238, 237, 237),
                     value: item.header,
                     headerBuilder: (context, isExpanded) => ListTitle(
                       title: Text(
