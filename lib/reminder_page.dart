@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:fids_mobile_app/main.dart';
 
 class ReminderPage extends StatefulWidget {
   const ReminderPage({super.key});
@@ -27,31 +28,60 @@ class _ReminderPageState extends State<ReminderPage> {
       body: ListView(children: <Widget>[
         SizedBox(
           height: 705,
+          // height: 400,
           child: FutureBuilder<List<PendingNotificationRequest>>(
             future: getPendingNotifications(),
             builder: (BuildContext context,
                 AsyncSnapshot<List<PendingNotificationRequest>> snapshot) {
               if (snapshot.hasData) {
-                if (snapshot.data?.isEmpty ?? true) {
+                if (snapshot.data!.isEmpty) {
                   return Container(
                     margin: const EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: 30.0, bottom: 600),
+                        left: 20.0, right: 20.0, top: 30.0, bottom: 540),
                     padding: const EdgeInsets.only(
                         left: 110.0, right: 110.0, top: 25.0),
                     decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 243, 236, 232),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                    child: const Text('NO REMINDERS',
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black)),
+                    child: Column(children: [
+                      const Text('NO REMINDERS',
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
+                      Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const MyBottomNavigationBar()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
+                          child: const Text('ADD REMINDER'),
+                        ),
+                      )
+                    ]),
                   );
                 }
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
+                    if (index < snapshot.data!.length - 1 &&
+                        snapshot.data![index].body ==
+                            snapshot.data![index + 1].body) {
+                      return Container();
+                    }
                     return Container(
                         height: 160,
                         margin: const EdgeInsets.only(
@@ -115,7 +145,6 @@ class _ReminderPageState extends State<ReminderPage> {
                             ],
                           ),
                           Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Container(
                                 margin: const EdgeInsets.only(
@@ -124,8 +153,19 @@ class _ReminderPageState extends State<ReminderPage> {
                                   icon: const Icon(Icons.delete,
                                       color: Colors.red, size: 35.0),
                                   onPressed: () {
-                                    flutterLocalNotificationsPlugin
-                                        .cancel(snapshot.data![index].id);
+                                    var id = [];
+                                    for (var i = 0;
+                                        i < snapshot.data!.length;
+                                        i++) {
+                                      if (snapshot.data![index].body ==
+                                          snapshot.data![i].body) {
+                                        id.add(snapshot.data![i].id);
+                                      }
+                                    }
+                                    for (var i = 0; i < id.length; i++) {
+                                      flutterLocalNotificationsPlugin
+                                          .cancel(id[i]);
+                                    }
                                     setState(() {});
                                   },
                                 ),

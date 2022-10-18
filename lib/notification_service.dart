@@ -75,6 +75,17 @@ class NotificationService {
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
+
+    await _localNotificationService.zonedSchedule(
+        id + 1,
+        title,
+        body,
+        tz.TZDateTime.from(
+            scheduledDate.subtract(const Duration(hours: 1)), tz.local),
+        notificationDetails,
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 
   Future onDidReceiveLocalNotification(

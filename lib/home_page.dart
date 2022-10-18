@@ -328,22 +328,17 @@ class _HomePageState extends State<HomePage> {
                                 Container(
                                   margin: const EdgeInsets.only(left: 260),
                                   child: IconButton(
-                                    // icon size
                                     iconSize: 32,
                                     icon: const Icon(Icons.notifications,
                                         color: Colors.red),
                                     onPressed: () async {
                                       await notifService.scheduleNotification(
-                                        // id: 1,
-                                        // get last notification id and increment it by one
                                         id: await notifService
                                                 .getLastNotificationId() +
                                             1,
                                         title: 'Flight Reminder',
                                         body:
                                             '${data[index].airline} - ${data[index].flightNo}\n${data[index].originIata} - ${data[index].destinationIata}\n${data[index].flightDate.toString().substring(0, 10)} - ${data[index].departureTime.toString().substring(0, 5)} hrs',
-                                        // scheduledDate: DateTime(
-                                        //     2022, 10, 19, 00, 47, 30));
                                         scheduledDate: DateTime(
                                             int.parse(data[index]
                                                 .flightDate
@@ -367,7 +362,7 @@ class _HomePageState extends State<HomePage> {
                                                 .substring(3, 5)),
                                             00),
                                       );
-                                      // if schedule date is not in future show dialog with text 'reminder not added'
+
                                       if (DateTime(
                                               int.parse(data[index]
                                                   .flightDate
