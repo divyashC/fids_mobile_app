@@ -160,7 +160,7 @@ class _SearchPageState extends State<RoutesPage> {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(bottom: 3, top: 20),
-                            width: 180,
+                            width: 150,
                             child: Text(
                               routeData[index]['originDestination'].toString(),
                               style: const TextStyle(
