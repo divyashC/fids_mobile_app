@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.red),
         body: ListView(children: <Widget>[
           Container(
-            margin: const EdgeInsets.only(left: 45.0, top: 40),
+            margin: const EdgeInsets.only(left: 55.0, top: 40),
             child: Row(
               children: [
                 Container(
