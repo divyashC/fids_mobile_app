@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:intl/intl.dart';
-// import 'package:fids_mobile_app/reminder_page.dart';
+import 'package:fids_mobile_app/reminder_page.dart';
 
 Future<List<Data>> fetchData() async {
   final response = await http
@@ -229,7 +229,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                             ),
-                            height: 250,
+                            height: 255,
                             child: Column(
                               children: [
                                 Row(
@@ -328,22 +328,17 @@ class _HomePageState extends State<HomePage> {
                                 Container(
                                   margin: const EdgeInsets.only(left: 260),
                                   child: IconButton(
-                                    // icon size
                                     iconSize: 32,
                                     icon: const Icon(Icons.notifications,
                                         color: Colors.red),
                                     onPressed: () async {
                                       await notifService.scheduleNotification(
-                                        // id: 1,
-                                        // get last notification id and increment it by one
                                         id: await notifService
                                                 .getLastNotificationId() +
                                             1,
                                         title: 'Flight Reminder',
                                         body:
-                                            '${data[index].originIata} - ${data[index].origin} to ${data[index].destinationIata} - ${data[index].destination}\nDeparture - ${data[index].departureTime.toString().substring(0, 5)}',
-                                        // scheduledDate: DateTime(
-                                        //     2022, 10, 19, 00, 47, 30));
+                                            '${data[index].airline} - ${data[index].flightNo}\n${data[index].originIata} - ${data[index].destinationIata}\n${data[index].flightDate.toString().substring(0, 10)} - ${data[index].departureTime.toString().substring(0, 5)} hrs',
                                         scheduledDate: DateTime(
                                             int.parse(data[index]
                                                 .flightDate
@@ -367,70 +362,147 @@ class _HomePageState extends State<HomePage> {
                                                 .substring(3, 5)),
                                             00),
                                       );
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              actionsPadding:
-                                                  const EdgeInsets.only(
-                                                      right: 20, bottom: 15),
-                                              contentPadding:
-                                                  const EdgeInsets.only(
-                                                      left: 25,
-                                                      top: 10,
-                                                      right: 25,
-                                                      bottom: 15),
-                                              titlePadding:
-                                                  const EdgeInsets.only(
-                                                      left: 25, top: 25),
-                                              title: const Text(
-                                                  'FIDS Reminder Set'),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                              ),
-                                              content: Text(
-                                                  'Date - ${data[index].flightDate.toString().substring(0, 10)} \nTime - ${data[index].departureTime.toString().substring(0, 5)} hrs \nFlight - ${data[index].originIata} - ${data[index].origin} to ${data[index].destinationIata} - ${data[index].destination}'),
-                                              actions: [
-                                                TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    style: TextButton.styleFrom(
-                                                        backgroundColor:
-                                                            Colors.red,
-                                                        foregroundColor:
-                                                            Colors.white,
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 5,
-                                                                right: 5,
-                                                                top: 10,
-                                                                bottom: 10),
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        15))),
-                                                    child: const Text('OK'))
-                                              ],
-                                            );
-                                          });
+
+                                      if (DateTime(
+                                              int.parse(data[index]
+                                                  .flightDate
+                                                  .toString()
+                                                  .substring(0, 4)),
+                                              int.parse(data[index]
+                                                  .flightDate
+                                                  .toString()
+                                                  .substring(5, 7)),
+                                              int.parse(data[index]
+                                                  .flightDate
+                                                  .toString()
+                                                  .substring(8, 10)),
+                                              int.parse(data[index]
+                                                  .departureTime
+                                                  .toString()
+                                                  .substring(0, 2)),
+                                              int.parse(data[index]
+                                                  .departureTime
+                                                  .toString()
+                                                  .substring(3, 5)),
+                                              00)
+                                          .isBefore(DateTime.now())) {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                actionsPadding:
+                                                    const EdgeInsets.only(
+                                                        right: 20, bottom: 15),
+                                                contentPadding:
+                                                    const EdgeInsets.only(
+                                                        left: 25,
+                                                        top: 10,
+                                                        right: 25,
+                                                        bottom: 15),
+                                                titlePadding:
+                                                    const EdgeInsets.only(
+                                                        left: 25, top: 25),
+                                                title: const Text(
+                                                    'Reminder Not Added'),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                ),
+                                                content: const Text(
+                                                    'Reminder cannot be set for past date and time'),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      style: TextButton.styleFrom(
+                                                          backgroundColor: Colors
+                                                              .red,
+                                                          foregroundColor: Colors
+                                                              .white,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 5,
+                                                                  right: 5,
+                                                                  top: 10,
+                                                                  bottom: 10),
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15))),
+                                                      child: const Text('OK'))
+                                                ],
+                                              );
+                                            });
+                                      } else {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                actionsPadding:
+                                                    const EdgeInsets.only(
+                                                        right: 20, bottom: 15),
+                                                contentPadding:
+                                                    const EdgeInsets.only(
+                                                        left: 25,
+                                                        top: 10,
+                                                        right: 25,
+                                                        bottom: 15),
+                                                titlePadding:
+                                                    const EdgeInsets.only(
+                                                        left: 25, top: 25),
+                                                title: const Text(
+                                                    'Reminder Added'),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                ),
+                                                content: Text(
+                                                    'Time: ${data[index].departureTime.toString().substring(0, 5)}\nDate: ${data[index].flightDate.toString().substring(0, 10)} \n${data[index].airline} - ${data[index].flightNo} \n${data[index].originIata} - ${data[index].destinationIata}'),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                        // change main.dart body to Reminders
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        const ReminderPage()));
+                                                      },
+                                                      style: TextButton.styleFrom(
+                                                          backgroundColor: Colors
+                                                              .red,
+                                                          foregroundColor: Colors
+                                                              .white,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 5,
+                                                                  right: 5,
+                                                                  top: 10,
+                                                                  bottom: 10),
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15))),
+                                                      child: const Text('OK'))
+                                                ],
+                                              );
+                                            });
+                                      }
 
                                       // await notifService.showNotification(
                                       //     id: 0,
                                       //     title: 'Flight Reminder',
                                       //     body:
                                       //         '${data[index].originIata} - ${data[index].origin} to ${data[index].destinationIata} - ${data[index].destination}\nDeparture - ${data[index].departureTime.toString().substring(0, 5)}',
-                                      // );
-
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //       builder: (context) =>
-                                      //           const ReminderPage()),
                                       // );
                                     },
                                   ),

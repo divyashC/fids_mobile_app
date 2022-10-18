@@ -199,12 +199,12 @@ class _SearchPageState extends State<RoutesPage> {
                               },
                               style: ElevatedButton.styleFrom(
                                 shape: const CircleBorder(),
-                                padding: EdgeInsets.zero,
+                                padding: const EdgeInsets.all(8.0),
                                 minimumSize: const Size(20, 20),
                               ),
                               child: const Icon(
-                                Icons.expand_more,
-                                size: 30,
+                                Icons.arrow_forward_ios_sharp,
+                                size: 20,
                               ),
                             ),
                           ])),
