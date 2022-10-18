@@ -305,7 +305,19 @@ class _SearchPageState extends State<SearchPage> {
                           );
                         });
                   } else if (snapshot.hasError) {
-                    return Text("${snapshot.error}");
+                    return Container(
+                        margin: const EdgeInsets.only(
+                            left: 60, top: 40, right: 60, bottom: 350),
+                        padding: const EdgeInsets.only(
+                            top: 30, left: 25, right: 25, bottom: 10),
+                        child: const Text(
+                          'API Connection Refused',
+                          style: TextStyle(
+                            fontSize: 19.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
                   }
                   // By default show a loading spinner.
                   return const CircularProgressIndicator();
