@@ -76,6 +76,17 @@ class NotificationService {
     return Future.value();
   }
 
+  // function to get last notification id
+  Future<int> getLastNotificationId() async {
+    final List<PendingNotificationRequest> pendingNotificationRequests =
+        await _localNotificationService.pendingNotificationRequests();
+    if (pendingNotificationRequests.isNotEmpty) {
+      return pendingNotificationRequests.last.id;
+    } else {
+      return 0;
+    }
+  }
+
   // void onDidReceiveLocalNotification(
   //     int id, String? title, String? body, String? payload) {}
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-var api = "https://localhost:7178/api/FlightAPI";
+var api = "https://84b4-103-133-216-195.in.ngrok.io/api/FlightAPI";
 
 Future<List<Data>> fetchData() async {
   final response = await http.get(Uri.parse(api));
@@ -125,10 +125,11 @@ class _SearchPageState extends State<SearchPage> {
                           if (textController.text != "") {
                             searchQuery = textController.text;
                             api =
-                                "https://localhost:7178/api/FlightAPI/search/$searchQuery";
+                                "https://84b4-103-133-216-195.in.ngrok.io/api/FlightAPI/search/$searchQuery";
                             futureData = fetchData();
                           } else {
-                            api = "https://localhost:7178/api/FlightAPI";
+                            api =
+                                "https://84b4-103-133-216-195.in.ngrok.io/api/FlightAPI";
                             futureData = fetchData();
                           }
                         });
@@ -182,7 +183,8 @@ class _SearchPageState extends State<SearchPage> {
                               style: TextStyle(fontSize: 15),
                             ),
                             onPressed: () {
-                              api = "https://localhost:7178/api/FlightAPI";
+                              api =
+                                  "https://84b4-103-133-216-195.in.ngrok.io/api/FlightAPI";
                               futureData = fetchData();
                               setState(() {});
                             },
@@ -306,18 +308,18 @@ class _SearchPageState extends State<SearchPage> {
                         });
                   } else if (snapshot.hasError) {
                     return Container(
-                        margin: const EdgeInsets.only(
-                            left: 60, top: 40, right: 60, bottom: 350),
-                        padding: const EdgeInsets.only(
-                            top: 30, left: 25, right: 25, bottom: 10),
-                        child: const Text(
-                          'API Connection Refused',
-                          style: TextStyle(
-                            fontSize: 19.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      margin: const EdgeInsets.only(
+                          left: 60, top: 40, right: 60, bottom: 350),
+                      padding: const EdgeInsets.only(
+                          top: 30, left: 25, right: 25, bottom: 10),
+                      child: const Text(
+                        'API Connection Refused',
+                        style: TextStyle(
+                          fontSize: 19.0,
+                          fontWeight: FontWeight.bold,
                         ),
-                      );
+                      ),
+                    );
                   }
                   // By default show a loading spinner.
                   return const CircularProgressIndicator();

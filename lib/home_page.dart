@@ -7,8 +7,8 @@ import 'package:intl/intl.dart';
 // import 'package:fids_mobile_app/reminder_page.dart';
 
 Future<List<Data>> fetchData() async {
-  final response =
-      await http.get(Uri.parse("https://localhost:7178/api/FlightAPI"));
+  final response = await http
+      .get(Uri.parse("https://84b4-103-133-216-195.in.ngrok.io/api/FlightAPI"));
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((data) => Data.fromJson(data)).toList();
@@ -334,7 +334,11 @@ class _HomePageState extends State<HomePage> {
                                         color: Colors.red),
                                     onPressed: () async {
                                       await notifService.scheduleNotification(
-                                        id: 1,
+                                        // id: 1,
+                                        // get last notification id and increment it by one
+                                        id: await notifService
+                                                .getLastNotificationId() +
+                                            1,
                                         title: 'Flight Reminder',
                                         body:
                                             '${data[index].originIata} - ${data[index].origin} to ${data[index].destinationIata} - ${data[index].destination}\nDeparture - ${data[index].departureTime.toString().substring(0, 5)}',
