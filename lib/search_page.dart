@@ -154,8 +154,44 @@ class _SearchPageState extends State<SearchPage> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<Data>? data = snapshot.data;
+                    if (data!.isEmpty) {
+                      return AlertDialog(
+                        actionsPadding:
+                            const EdgeInsets.only(right: 20, bottom: 15),
+                        contentPadding: const EdgeInsets.only(
+                            left: 25, top: 10, bottom: 15),
+                        titlePadding: const EdgeInsets.only(left: 25, top: 25),
+                        title: const Text('ALERT'),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        content: const Text(
+                          'No flights found!',
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            style: TextButton.styleFrom(
+                                backgroundColor: Colors.red,
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.only(
+                                    left: 5, right: 5, top: 10, bottom: 10),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15))),
+                            child: const Text(
+                              'OK',
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            onPressed: () {
+                              api = "https://localhost:7178/api/FlightAPI";
+                              futureData = fetchData();
+                              setState(() {});
+                            },
+                          ),
+                        ],
+                      );
+                    }
                     return ListView.builder(
-                        itemCount: data?.length,
+                        itemCount: data.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
                             margin: const EdgeInsets.only(
@@ -176,7 +212,7 @@ class _SearchPageState extends State<SearchPage> {
                                       margin: const EdgeInsets.only(
                                           left: 10.0, top: 10.0),
                                       child: Image.asset(
-                                        data?[index].airline == "Druk Air"
+                                        data[index].airline == "Druk Air"
                                             ? drukAirLogo
                                             : bhutanAirlinesLogo,
                                         fit: BoxFit.fill,
@@ -186,7 +222,7 @@ class _SearchPageState extends State<SearchPage> {
                                         margin: const EdgeInsets.only(
                                             left: 20, top: 7),
                                         child: Text(
-                                          data![index].flightNo.toString(),
+                                          data[index].flightNo.toString(),
                                           style: const TextStyle(
                                               fontSize: 19.0,
                                               fontWeight: FontWeight.bold),
