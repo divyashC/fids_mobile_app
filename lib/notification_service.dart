@@ -59,6 +59,16 @@ class NotificationService {
       required String title,
       required String body,
       required DateTime scheduledDate}) async {
+    if (scheduledDate.isBefore(DateTime.now())) {
+      return;
+    }
+
+    final pendingNotifications =
+        await _localNotificationService.pendingNotificationRequests();
+    if (pendingNotifications.any((notification) => notification.body == body)) {
+      return;
+    }
+
     final notificationDetails = await _notificationDetails();
     await _localNotificationService.zonedSchedule(id, title, body,
         tz.TZDateTime.from(scheduledDate, tz.local), notificationDetails,
@@ -86,9 +96,4 @@ class NotificationService {
       return 0;
     }
   }
-
-  // void onDidReceiveLocalNotification(
-  //     int id, String? title, String? body, String? payload) {}
-
-  // void onSelectNotification(String? payload) {}
 }
