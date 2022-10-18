@@ -26,27 +26,36 @@ class _InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('FAQs'),
+          title: const Text('Help'),
           centerTitle: true,
           backgroundColor: Colors.red,
         ),
         body: SingleChildScrollView(
           child: ExpansionPanelList.radio(
+            animationDuration: const Duration(milliseconds: 300),
+            initialOpenPanelValue: 26,
             children: items
                 .map(
                   (item) => ExpansionPanelRadio(
                     canTapOnHeader: true,
+                    backgroundColor: Color.fromARGB(255, 238, 237, 237),
                     value: item.header,
                     headerBuilder: (context, isExpanded) => ListTitle(
                       title: Text(
                         item.header,
-                        style: const TextStyle(fontSize: 20),
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Arial',
+                        ),
                       ),
                     ),
                     body: ListTitle(
                       title: Text(
                         item.body,
-                        style: const TextStyle(fontSize: 18),
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                        overflow: TextOverflow.clip,
                       ),
                     ),
                   ),
