@@ -7,6 +7,7 @@ var api = "https://localhost:7178/api/FlightAPI";
 
 Future<List<Data>> fetchData() async {
   final response = await http.get(Uri.parse(api));
+
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((data) => Data.fromJson(data)).toList();
@@ -77,8 +78,8 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
-    super.initState();
     futureData = fetchData();
+    super.initState();
   }
 
   var pathImg = "assets/images/path.png";

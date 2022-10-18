@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+import 'package:intl/intl.dart';
 
 Future<List<Data>> fetchData() async {
   final response =
@@ -73,12 +74,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String _timeString = '';
+  String _hours = '';
+  String _mins = '';
+  String _secs = '';
   late Future<List<Data>> futureData;
 
   @override
   void initState() {
     super.initState();
     futureData = fetchData();
+    _timeString = _formatDateTime(DateTime.now());
+    Timer.periodic(const Duration(seconds: 1), (Timer t) => _getTime());
   }
 
   var pathImg = "assets/images/path.png";
@@ -94,11 +101,83 @@ class _HomePageState extends State<HomePage> {
             centerTitle: true,
             backgroundColor: Colors.red),
         body: ListView(children: <Widget>[
-          // Container(),
           Container(
-            margin: const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
+            margin: const EdgeInsets.only(left: 45.0, top: 40),
+            child: Row(
+              children: [
+                Container(
+                  margin:
+                      const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 30),
+                  padding:
+                      const EdgeInsets.only(left: 15.0, right: 15.0, top: 20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[400],
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  ),
+                  height: 85,
+                  child: Text(_hours,
+                      style: const TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black)),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+                  height: 85,
+                  child: const Text(":",
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black)),
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 30),
+                  padding:
+                      const EdgeInsets.only(left: 15.0, right: 15.0, top: 20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[400],
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  ),
+                  height: 85,
+                  child: Text(_mins,
+                      style: const TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black)),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+                  height: 85,
+                  child: const Text(":",
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black)),
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 30),
+                  padding:
+                      const EdgeInsets.only(left: 15.0, right: 15.0, top: 20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[400],
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  ),
+                  height: 85,
+                  child: Text(_secs,
+                      style: const TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black)),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 10.0, right: 10.0),
             padding: const EdgeInsets.only(bottom: 30),
-            height: 707,
+            height: 580,
             child: Container(
               margin: const EdgeInsets.only(top: 10.0),
               child: FutureBuilder<List<Data>>(
@@ -230,5 +309,27 @@ class _HomePageState extends State<HomePage> {
             ),
           )
         ]));
+  }
+
+  void _getTime() {
+    final DateTime now = DateTime.now();
+    final String formattedDateTime = _formatDateTime(now);
+    setState(() {
+      _timeString = formattedDateTime;
+      _hours = _timeString.substring(11, 13);
+      _mins = _timeString.substring(14, 16);
+      _secs = _timeString.substring(17, 19);
+      _hours = _formatAmpm(now) == "PM"
+          ? (int.parse(_hours) + 12).toString()
+          : _hours;
+    });
+  }
+
+  String _formatAmpm(DateTime dateTime) {
+    return DateFormat('a').format(dateTime);
+  }
+
+  String _formatDateTime(DateTime dateTime) {
+    return DateFormat('MM/dd/yyyy hh:mm:ss').format(dateTime);
   }
 }

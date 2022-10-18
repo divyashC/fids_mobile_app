@@ -15,8 +15,6 @@ class _SearchPageState extends State<RoutesPage> {
 
   @override
   Widget build(BuildContext context) {
-    var fonstAwesomeIcons;
-    var menu;
     return Scaffold(
         appBar: AppBar(
           title: const Text('FLIGHT ROUTES'),
