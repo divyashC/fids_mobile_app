@@ -287,7 +287,7 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                     Container(
                                       margin: const EdgeInsets.only(
-                                          left: 15, right: 15),
+                                          left: 10, right: 10),
                                       child: Image.asset(
                                         pathImg,
                                         fit: BoxFit.cover,
@@ -326,7 +326,7 @@ class _HomePageState extends State<HomePage> {
                                       style: const TextStyle(fontSize: 15)),
                                 ),
                                 Container(
-                                  margin: const EdgeInsets.only(left: 290),
+                                  margin: const EdgeInsets.only(left: 260),
                                   child: IconButton(
                                     // icon size
                                     iconSize: 32,
