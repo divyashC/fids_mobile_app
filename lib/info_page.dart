@@ -8,21 +8,6 @@ class InfoPage extends StatefulWidget {
 }
 
 class _InfoPageState extends State<InfoPage> {
-  static const loremIpsum =
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel sem quis massa sollicitudin ultrices. Aenean turpis felis, gravida aliquam quam ac, venenatis pellentesque dolor. Aliquam quis massa euismod, pulvinar elit sit amet, sollicitudin est. Sed nunc purus, egestas quis rhoncus vitae, egestas consectetur libero. Etiam at ornare purus.';
-  final List<Item> items = [
-    Item(header: 'Can I book tickets with the app?', body: loremIpsum),
-    Item(header: 'Can I set multiple reminders?', body: loremIpsum),
-    Item(header: 'How frequently are the details updated?', body: loremIpsum),
-    Item(header: 'Are the flight route accurate?', body: loremIpsum),
-    Item(header: 'How far can I rely on this app?', body: loremIpsum),
-    Item(header: 'Is there any helpline contact details? ', body: loremIpsum),
-    Item(header: 'How will this app benefit us?', body: loremIpsum),
-    Item(header: 'Will I get infos on flight cancellation?', body: loremIpsum),
-    Item(header: 'Is this app paid or free?', body: loremIpsum),
-    Item(header: 'Can I use this app on other OS or web?', body: loremIpsum),
-  ];
-
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -30,64 +15,40 @@ class _InfoPageState extends State<InfoPage> {
           centerTitle: true,
           backgroundColor: Colors.red,
         ),
-        body: SingleChildScrollView(
-          padding:
-              const EdgeInsets.only(left: 20, top: 20, bottom: 20, right: 20),
-          child: ExpansionPanelList.radio(
-            expandedHeaderPadding: (const EdgeInsets.all(20)),
-            animationDuration: const Duration(milliseconds: 500),
-            initialOpenPanelValue: 26,
-            children: items
-                .map(
-                  (item) => ExpansionPanelRadio(
-                    canTapOnHeader: true,
-                    backgroundColor: const Color.fromARGB(255, 238, 237, 237),
-                    value: item.header,
-                    headerBuilder: (context, isExpanded) => ListTitle(
-                      title: Text(
-                        item.header,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: (FontWeight.bold),
-                          fontFamily: 'Arial',
-                        ),
-                      ),
-                    ),
-                    body: ListTitle(
-                      title: Text(
-                        item.body,
-                        style: const TextStyle(
-                          fontSize: 18,
-                        ),
-                        overflow: TextOverflow.clip,
-                      ),
+        body: ListView(
+          children: <Widget>[
+            Column(
+              children: [
+                Container(
+                  height: 50,
+                  width: 400,
+                  decoration: const BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 2.0,
+                        spreadRadius: 0.0,
+                        offset:
+                            Offset(0.0, 0.0), // shadow direction: bottom right
+                      )
+                    ],
+                    color: Color.fromARGB(255, 228, 225, 223),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                  ),
+                  margin:
+                      const EdgeInsets.only(left: 30.0, right: 20.0, top: 30.0),
+                  padding: const EdgeInsets.only(left: 40.0, top: 15.0),
+                  child: const Text(
+                    'What is the purpose of this app?',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                )
-                .toList(),
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       );
-}
-
-class ListTitle extends StatelessWidget {
-  const ListTitle({super.key, required this.title});
-
-  final Widget title;
-
-  @override
-  Widget build(BuildContext context) => ListTile(
-        title: title,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-      );
-}
-
-class Item {
-  final String header;
-  final String body;
-
-  Item({
-    required this.header,
-    required this.body,
-  });
 }
