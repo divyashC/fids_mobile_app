@@ -229,7 +229,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                             ),
-                            height: 255,
+                            height: 250,
                             child: Column(
                               children: [
                                 Row(
@@ -266,7 +266,6 @@ class _HomePageState extends State<HomePage> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    // ignore: prefer_const_literals_to_create_immutables
                                     Column(children: [
                                       Container(
                                         margin:
@@ -295,7 +294,6 @@ class _HomePageState extends State<HomePage> {
                                         width: 90,
                                       ),
                                     ),
-                                    // ignore: prefer_const_literals_to_create_immutables
                                     Column(children: [
                                       Container(
                                         margin:
