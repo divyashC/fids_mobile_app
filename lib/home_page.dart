@@ -8,7 +8,7 @@ import 'package:fids_mobile_app/reminder_page.dart';
 
 Future<List<Data>> fetchData() async {
   final response = await http
-      .get(Uri.parse("https://84b4-103-133-216-195.in.ngrok.io/api/FlightAPI"));
+      .get(Uri.parse("https://a518-103-133-216-195.in.ngrok.io/api/FlightAPI"));
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((data) => Data.fromJson(data)).toList();

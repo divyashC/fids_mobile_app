@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-var api = "https://84b4-103-133-216-195.in.ngrok.io/api/FlightAPI";
+var api = "https://a518-103-133-216-195.in.ngrok.io/api/FlightAPI";
 
 Future<List<Data>> fetchData() async {
   final response = await http.get(Uri.parse(api));
@@ -125,11 +125,11 @@ class _SearchPageState extends State<SearchPage> {
                           if (textController.text != "") {
                             searchQuery = textController.text;
                             api =
-                                "https://84b4-103-133-216-195.in.ngrok.io/api/FlightAPI/search/$searchQuery";
+                                "https://a518-103-133-216-195.in.ngrok.io/api/FlightAPI/search/$searchQuery";
                             futureData = fetchData();
                           } else {
                             api =
-                                "https://84b4-103-133-216-195.in.ngrok.io/api/FlightAPI";
+                                "https://a518-103-133-216-195.in.ngrok.io/api/FlightAPI";
                             futureData = fetchData();
                           }
                         });
