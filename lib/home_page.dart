@@ -105,6 +105,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // var screenHeight = MediaQuery.of(context).size.height - 85 - 56 - 24;
     return Scaffold(
         appBar: AppBar(
             title: const Text('FLIGHT SCHEDULE'),
@@ -229,7 +230,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                             ),
-                            height: 250,
+                            height: 260,
                             child: Column(
                               children: [
                                 Row(
@@ -324,7 +325,7 @@ class _HomePageState extends State<HomePage> {
                                       style: const TextStyle(fontSize: 15)),
                                 ),
                                 Container(
-                                  margin: const EdgeInsets.only(left: 260),
+                                  alignment: Alignment.centerRight,
                                   child: IconButton(
                                     iconSize: 32,
                                     icon: const Icon(Icons.notifications,
