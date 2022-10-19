@@ -105,7 +105,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // var screenHeight = MediaQuery.of(context).size.height - 85 - 56 - 24;
     return Scaffold(
         appBar: AppBar(
             title: const Text('FLIGHT SCHEDULE'),
@@ -189,7 +188,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.only(left: 10.0, right: 10.0),
             padding: const EdgeInsets.only(bottom: 30),
-            height: 580,
+            height: MediaQuery.of(context).size.height - 85 - 56 - 24,
             child: Container(
               margin: const EdgeInsets.only(top: 10.0),
               child: FutureBuilder<List<Data>>(
@@ -220,9 +219,11 @@ class _HomePageState extends State<HomePage> {
                     return ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (BuildContext context, int index) {
+                          double listMargin =
+                              index == data.length - 1 ? 260 : 50;
                           return Container(
-                            margin: const EdgeInsets.only(
-                                left: 20.0, right: 20.0, bottom: 30),
+                            margin: EdgeInsets.only(
+                                left: 20.0, right: 20.0, bottom: listMargin),
                             padding: const EdgeInsets.only(
                                 left: 20.0, right: 20.0, top: 20.0),
                             decoration: const BoxDecoration(
