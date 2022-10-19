@@ -529,7 +529,7 @@ class _HomePageState extends State<HomePage> {
                   }
                   return Container(
                     margin: const EdgeInsets.only(
-                        top: 100, left: 130, bottom: 300, right: 130),
+                        top: 80, left: 130, bottom: 500, right: 130),
                     child: const CircularProgressIndicator(),
                   );
                 },
