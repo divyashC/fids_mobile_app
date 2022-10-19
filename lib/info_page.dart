@@ -21,6 +21,17 @@ class _InfoPageState extends State<InfoPage> {
     Item(header: 'Will I get infos on flight cancellation?', body: loremIpsum),
     Item(header: 'Is this app paid or free?', body: loremIpsum),
     Item(header: 'Can I use this app on other OS or web?', body: loremIpsum),
+    Item(
+        header: 'Does this app provide real time flight tracking?',
+        body: loremIpsum),
+    Item(
+        header: 'Can I get ticket availability information?', body: loremIpsum),
+    Item(header: 'Can I get flight status?', body: loremIpsum),
+    Item(header: 'Who is this app for?', body: loremIpsum),
+    Item(
+        header: 'Is the API available to consumers on subscription?',
+        body: loremIpsum),
+    Item(header: 'Does this app work offline?', body: loremIpsum),
   ];
 
   @override
@@ -32,23 +43,23 @@ class _InfoPageState extends State<InfoPage> {
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.only(
-            top: 15,
+            top: 40,
             left: 20,
             right: 20,
+            bottom: 50,
           ),
           child: ExpansionPanelList.radio(
-            elevation: 0,
+            animationDuration: const Duration(milliseconds: 700),
+            dividerColor: Colors.blue.shade100,
+            elevation: 4,
             children: items
                 .map(
                   (item) => ExpansionPanelRadio(
-                    // backgroundColor: Colors.red.shade100,
                     canTapOnHeader: true,
                     value: item.header,
-                    //container
                     headerBuilder: (context, isExpanded) => Container(
                       padding: const EdgeInsets.only(
                           left: 0, right: 10, top: 5, bottom: 5),
-                      margin: const EdgeInsets.only(bottom: 10),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 255, 255, 255),
                         borderRadius: BorderRadius.circular(15),
@@ -61,10 +72,12 @@ class _InfoPageState extends State<InfoPage> {
                       ),
                     ),
                     body: Container(
+                      margin: const EdgeInsets.only(
+                          bottom: 20, left: 20, right: 20),
                       padding: const EdgeInsets.only(
-                          left: 20, right: 20, bottom: 30, top: 30),
+                          left: 10, right: 10, bottom: 30, top: 30),
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(245, 255, 245, 245),
+                        color: const Color.fromARGB(245, 253, 242, 242),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: ListTitle(
