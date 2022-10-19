@@ -326,7 +326,7 @@ class _SearchPageState extends State<SearchPage> {
                   // By default show a loading spinner.
                   return Container(
                     margin: const EdgeInsets.only(
-                        top: 100, left: 130, bottom: 230, right: 130),
+                        top: 100, left: 130, bottom: 400, right: 130),
                     child: const CircularProgressIndicator(),
                   );
                 },
