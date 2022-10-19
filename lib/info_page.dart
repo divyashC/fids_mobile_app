@@ -85,33 +85,32 @@ class _InfoPageState extends State<InfoPage> {
           backgroundColor: Colors.red,
         ),
         body: ListView.builder(
-          itemCount: details.length,
-          itemBuilder: (context, index) {
-            return Container(
-                height: 50,
-                width: 40,
-                margin: const EdgeInsets.only(
-                    top: 10, bottom: 10, left: 10, right: 8),
-                color: const Color.fromARGB(31, 155, 32, 32),
-                child: Column(
-                  children: [
+            itemCount: details.length,
+            itemBuilder: (context, index) {
+              return Container(
+                  height: 100,
+                  width: 40,
+                  margin: const EdgeInsets.only(
+                      top: 10, bottom: 10, left: 10, right: 8),
+                  color: const Color.fromARGB(31, 155, 32, 32),
+                  child: Column(children: [
                     SizedBox(
-                      height: 50,
-                      width: 200,
+                      height: 100,
+                      width: 350,
                       child: ExpansionTile(
-                        title: Text(details[0]['question'].toString()),
+                        title: Text(
+                          details[index]['question'].toString(),
+                        ),
+                        // subtitle: Text(details[index]['answer'].toString()),
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, bottom: 10, left: 10, right: 0),
+                            padding: const EdgeInsets.only(left: 10, right: 0),
                             child: Text(details[0]['answer'].toString()),
                           )
                         ],
                       ),
-                    ),
-                  ],
-                ));
-          },
-        ));
+                    )
+                  ]));
+            }));
   }
 }
