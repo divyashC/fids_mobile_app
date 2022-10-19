@@ -231,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                             ),
-                            height: 260,
+                            height: 450,
                             child: Column(
                               children: [
                                 Row(
@@ -317,13 +317,118 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                                 Container(
-                                  margin: const EdgeInsets.only(top: 20),
+                                  margin: const EdgeInsets.only(
+                                      top: 20, bottom: 10),
                                   child: Text(
                                       data[index]
                                           .flightDate
                                           .toString()
                                           .substring(0, 10),
                                       style: const TextStyle(fontSize: 15)),
+                                ),
+                                const Divider(
+                                  color: Colors.black26,
+                                  height: 20,
+                                  thickness: 0.8,
+                                  indent: 30,
+                                  endIndent: 30,
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(top: 10),
+                                  child: Container(
+                                    margin: const EdgeInsets.only(
+                                        top: 10.0, left: 30),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: const EdgeInsets.only(
+                                              bottom: 20.0),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                  width: 45,
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 10,
+                                                          bottom: 10,
+                                                          left: 15,
+                                                          right: 15),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          color: Colors.red,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          5))),
+                                                  child: Text(
+                                                      data[index]
+                                                          .departureTerminal
+                                                          .toString(),
+                                                      style: const TextStyle(
+                                                          fontSize: 25,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color:
+                                                              Colors.white))),
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    left: 20.0),
+                                                child: const Text(
+                                                    "Departure Terminal",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.black)),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: const EdgeInsets.only(
+                                              bottom: 10.0),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                  width: 45,
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 10,
+                                                          bottom: 10,
+                                                          left: 15,
+                                                          right: 15),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          color: Colors.red,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          5))),
+                                                  child: Text(
+                                                      data[index]
+                                                          .arrivalTerminal
+                                                          .toString(),
+                                                      style: const TextStyle(
+                                                          fontSize: 25,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color:
+                                                              Colors.white))),
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    left: 20.0),
+                                                child: const Text(
+                                                    "Arrival Terminal",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.black)),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                                 Container(
                                   alignment: Alignment.centerRight,
