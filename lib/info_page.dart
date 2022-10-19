@@ -44,6 +44,7 @@ class _InfoPageState extends State<InfoPage> {
                     // backgroundColor: Colors.red.shade100,
                     canTapOnHeader: true,
                     value: item.header,
+                    //container
                     headerBuilder: (context, isExpanded) => Container(
                       padding: const EdgeInsets.only(
                           left: 0, right: 10, top: 5, bottom: 5),
@@ -63,7 +64,7 @@ class _InfoPageState extends State<InfoPage> {
                       padding: const EdgeInsets.only(
                           left: 20, right: 20, bottom: 30, top: 30),
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 243, 233, 234),
+                        color: const Color.fromARGB(245, 255, 245, 245),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: ListTitle(
