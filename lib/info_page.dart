@@ -31,7 +31,11 @@ class _InfoPageState extends State<InfoPage> {
           backgroundColor: Colors.red,
         ),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.only(
+            top: 15,
+            left: 20,
+            right: 20,
+          ),
           child: ExpansionPanelList.radio(
             elevation: 0,
             children: items
@@ -42,16 +46,16 @@ class _InfoPageState extends State<InfoPage> {
                     value: item.header,
                     headerBuilder: (context, isExpanded) => Container(
                       padding: const EdgeInsets.only(
-                          left: 20, right: 20, top: 10, bottom: 10),
-                      margin: const EdgeInsets.only(bottom: 20),
+                          left: 0, right: 10, top: 5, bottom: 5),
+                      margin: const EdgeInsets.only(bottom: 10),
                       decoration: BoxDecoration(
-                        color: Colors.red.shade100,
-                        borderRadius: BorderRadius.circular(30),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       child: ListTitle(
                         title: Text(
                           item.header,
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ),
                     ),
@@ -59,8 +63,8 @@ class _InfoPageState extends State<InfoPage> {
                       padding: const EdgeInsets.only(
                           left: 20, right: 20, bottom: 30, top: 30),
                       decoration: BoxDecoration(
-                        color: Colors.red.shade100,
-                        borderRadius: BorderRadius.circular(30),
+                        color: const Color.fromARGB(255, 243, 233, 234),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       child: ListTitle(
                         title: Text(
