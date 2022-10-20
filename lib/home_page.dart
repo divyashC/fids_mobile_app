@@ -26,8 +26,8 @@ Future<List<Data>> fetchData() async {
     }
   ];
   try {
-    final response =
-        await http.get(Uri.parse("https://localhost:7178/api/FlightAPI"));
+    final response = await http.get(Uri.parse(
+        "https://fcc6-2405-d000-a112-749b-bdcb-b458-602e-56bf.in.ngrok.io/api/FlightAPI"));
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
       return jsonResponse.map((data) => Data.fromJson(data)).toList();
@@ -225,9 +225,9 @@ class _HomePageState extends State<HomePage> {
                     if (data!.isEmpty) {
                       return Container(
                         margin: const EdgeInsets.only(
-                            left: 100, top: 40, right: 100, bottom: 550),
+                            left: 80, top: 40, right: 80, bottom: 550),
                         padding: const EdgeInsets.only(
-                            top: 30, left: 25, right: 20, bottom: 20),
+                            top: 30, left: 35, right: 30, bottom: 25),
                         decoration: const BoxDecoration(
                           color: Color.fromARGB(255, 243, 236, 232),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -248,9 +248,9 @@ class _HomePageState extends State<HomePage> {
                           if (data[index].flightId == 0) {
                             return Container(
                               margin: const EdgeInsets.only(
-                                  left: 100, top: 40, right: 100, bottom: 550),
+                                  left: 80, top: 40, right: 80, bottom: 550),
                               padding: const EdgeInsets.only(
-                                  top: 30, left: 25, right: 20, bottom: 20),
+                                  top: 30, left: 35, right: 30, bottom: 25),
                               decoration: const BoxDecoration(
                                 color: Color.fromARGB(255, 243, 236, 232),
                                 borderRadius:
@@ -641,7 +641,7 @@ class _HomePageState extends State<HomePage> {
                   }
                   return Container(
                     margin: const EdgeInsets.only(
-                        top: 80, left: 130, bottom: 500, right: 130),
+                        top: 80, left: 130, bottom: 450, right: 130),
                     child: const CircularProgressIndicator(),
                   );
                 },

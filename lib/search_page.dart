@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-var api = "https://localhost:7178/api/FlightAPI";
+var api =
+    "https://fcc6-2405-d000-a112-749b-bdcb-b458-602e-56bf.in.ngrok.io/api/FlightAPI";
 
 Future<List<Data>> fetchData() async {
   var jsonResponse = [
@@ -144,10 +145,11 @@ class _SearchPageState extends State<SearchPage> {
                           if (textController.text != "") {
                             searchQuery = textController.text;
                             api =
-                                "https://localhost:7178/api/FlightAPI/search/$searchQuery";
+                                "https://fcc6-2405-d000-a112-749b-bdcb-b458-602e-56bf.in.ngrok.io/FlightAPI/search/$searchQuery";
                             futureData = fetchData();
                           } else {
-                            api = "https://localhost:7178/api/FlightAPI";
+                            api =
+                                "https://fcc6-2405-d000-a112-749b-bdcb-b458-602e-56bf.in.ngrok.io/api/FlightAPI";
                             futureData = fetchData();
                           }
                         });
@@ -217,9 +219,9 @@ class _SearchPageState extends State<SearchPage> {
                           if (data[index].flightId == 0) {
                             return Container(
                               margin: const EdgeInsets.only(
-                                  left: 100, top: 40, right: 100, bottom: 550),
+                                  left: 80, top: 40, right: 80, bottom: 550),
                               padding: const EdgeInsets.only(
-                                  top: 30, left: 25, right: 20, bottom: 20),
+                                  top: 30, left: 35, right: 30, bottom: 25),
                               decoration: const BoxDecoration(
                                 color: Color.fromARGB(255, 243, 236, 232),
                                 borderRadius:
@@ -247,7 +249,7 @@ class _SearchPageState extends State<SearchPage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                             ),
-                            height: 220,
+                            height: 225,
                             child: Column(
                               children: [
                                 Row(
@@ -366,7 +368,7 @@ class _SearchPageState extends State<SearchPage> {
                   // By default show a loading spinner.
                   return Container(
                     margin: const EdgeInsets.only(
-                        top: 100, left: 130, bottom: 400, right: 130),
+                        top: 100, left: 130, bottom: 360, right: 130),
                     child: const CircularProgressIndicator(),
                   );
                 },
