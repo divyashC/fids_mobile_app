@@ -111,7 +111,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    // if not able to connect to the server dont throw exception
     return super.createHttpClient(context)
       ..badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;

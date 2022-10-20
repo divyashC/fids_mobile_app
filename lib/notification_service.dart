@@ -11,8 +11,10 @@ class NotificationService {
   Future<void> initialize() async {
     tz.initializeTimeZones();
 
+    // const androidInitializationSettings =
+    //     AndroidInitializationSettings('@mipmap/ic_launcher');
     const androidInitializationSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@drawable/launch_background');
 
     IOSInitializationSettings iosInitializationSettings =
         IOSInitializationSettings(
@@ -76,16 +78,22 @@ class NotificationService {
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
 
-    await _localNotificationService.zonedSchedule(
-        id + 1,
-        title,
-        body,
-        tz.TZDateTime.from(
-            scheduledDate.subtract(const Duration(hours: 1)), tz.local),
-        notificationDetails,
-        androidAllowWhileIdle: true,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
+    if (tz.TZDateTime.from(
+            scheduledDate.subtract(const Duration(hours: 1)), tz.local)
+        .isBefore(DateTime.now())) {
+      return;
+    } else {
+      await _localNotificationService.zonedSchedule(
+          id + 1,
+          title,
+          body,
+          tz.TZDateTime.from(
+              scheduledDate.subtract(const Duration(hours: 1)), tz.local),
+          notificationDetails,
+          androidAllowWhileIdle: true,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime);
+    }
   }
 
   Future onDidReceiveLocalNotification(

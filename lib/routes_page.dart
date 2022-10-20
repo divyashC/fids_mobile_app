@@ -160,7 +160,7 @@ class _SearchPageState extends State<RoutesPage> {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(bottom: 3, top: 20),
-                            width: 150,
+                            width: 170,
                             child: Text(
                               routeData[index]['originDestination'].toString(),
                               style: const TextStyle(
@@ -179,7 +179,7 @@ class _SearchPageState extends State<RoutesPage> {
                       ),
                       Container(
                           margin: const EdgeInsets.only(
-                              top: 30, left: 90, bottom: 10),
+                              top: 30, left: 90, bottom: 15),
                           child: Row(children: [
                             ElevatedButton(
                               onPressed: () {

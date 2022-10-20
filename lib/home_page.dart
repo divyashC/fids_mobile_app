@@ -7,8 +7,10 @@ import 'package:intl/intl.dart';
 import 'package:fids_mobile_app/reminder_page.dart';
 
 Future<List<Data>> fetchData() async {
-  final response = await http
-      .get(Uri.parse("https://a518-103-133-216-195.in.ngrok.io/api/FlightAPI"));
+  final response =
+      await http.get(Uri.parse("https://localhost:7178/api/FlightAPI"));
+  // if (response.statusCode == 200) return jsonResopnse
+  // if client socket exception, return empty list
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((data) => Data.fromJson(data)).toList();
@@ -82,9 +84,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   String _timeString = '';
-  String _hours = '';
-  String _mins = '';
-  String _secs = '';
+  // String _hours = '';
+  // String _mins = '';
+  // String _secs = '';
 
   late Future<List<Data>> futureData;
   late final NotificationService notifService;
@@ -126,7 +128,11 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                   ),
                   height: 85,
-                  child: Text(_hours,
+                  child: Text(
+                      DateFormat('a').format(DateTime.now()) == "PM"
+                          ? (int.parse(_timeString.substring(11, 13)) + 12)
+                              .toString()
+                          : _timeString.substring(11, 13),
                       style: const TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
@@ -151,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                   ),
                   height: 85,
-                  child: Text(_mins,
+                  child: Text(_timeString.substring(14, 16),
                       style: const TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
@@ -176,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                   ),
                   height: 85,
-                  child: Text(_secs,
+                  child: Text(_timeString.substring(17, 19),
                       style: const TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
@@ -199,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                     if (data!.isEmpty) {
                       return Container(
                         margin: const EdgeInsets.only(
-                            left: 100, top: 40, right: 100, bottom: 350),
+                            left: 100, top: 40, right: 100, bottom: 550),
                         padding: const EdgeInsets.only(
                             top: 30, left: 25, right: 20, bottom: 20),
                         decoration: const BoxDecoration(
@@ -437,6 +443,9 @@ class _HomePageState extends State<HomePage> {
                                     icon: const Icon(Icons.notifications,
                                         color: Colors.red),
                                     onPressed: () async {
+                                      DateTime now = getDate(
+                                          data[index].flightDate.toString(),
+                                          data[index].departureTime.toString());
                                       await notifService.scheduleNotification(
                                         id: await notifService
                                                 .getLastNotificationId() +
@@ -444,53 +453,10 @@ class _HomePageState extends State<HomePage> {
                                         title: 'Flight Reminder',
                                         body:
                                             '${data[index].airline} - ${data[index].flightNo}\n${data[index].originIata} - ${data[index].destinationIata}\n${data[index].flightDate.toString().substring(0, 10)} - ${data[index].departureTime.toString().substring(0, 5)} hrs',
-                                        scheduledDate: DateTime(
-                                            int.parse(data[index]
-                                                .flightDate
-                                                .toString()
-                                                .substring(0, 4)),
-                                            int.parse(data[index]
-                                                .flightDate
-                                                .toString()
-                                                .substring(5, 7)),
-                                            int.parse(data[index]
-                                                .flightDate
-                                                .toString()
-                                                .substring(8, 10)),
-                                            int.parse(data[index]
-                                                .departureTime
-                                                .toString()
-                                                .substring(0, 2)),
-                                            int.parse(data[index]
-                                                .departureTime
-                                                .toString()
-                                                .substring(3, 5)),
-                                            00),
+                                        scheduledDate: now,
                                       );
 
-                                      if (DateTime(
-                                              int.parse(data[index]
-                                                  .flightDate
-                                                  .toString()
-                                                  .substring(0, 4)),
-                                              int.parse(data[index]
-                                                  .flightDate
-                                                  .toString()
-                                                  .substring(5, 7)),
-                                              int.parse(data[index]
-                                                  .flightDate
-                                                  .toString()
-                                                  .substring(8, 10)),
-                                              int.parse(data[index]
-                                                  .departureTime
-                                                  .toString()
-                                                  .substring(0, 2)),
-                                              int.parse(data[index]
-                                                  .departureTime
-                                                  .toString()
-                                                  .substring(3, 5)),
-                                              00)
-                                          .isBefore(DateTime.now())) {
+                                      if (now.isBefore(DateTime.now())) {
                                         showDialog(
                                             context: context,
                                             builder: (BuildContext context) {
@@ -649,13 +615,23 @@ class _HomePageState extends State<HomePage> {
     final String formattedDateTime = _formatDateTime(now);
     setState(() {
       _timeString = formattedDateTime;
-      _hours = _timeString.substring(11, 13);
-      _mins = _timeString.substring(14, 16);
-      _secs = _timeString.substring(17, 19);
-      _hours = DateFormat('a').format(now) == "PM"
-          ? (int.parse(_hours) + 12).toString()
-          : _hours;
+      // _hours = _timeString.substring(11, 13);
+      // _mins = _timeString.substring(14, 16);
+      // _secs = _timeString.substring(17, 19);
+      // _hours = DateFormat('a').format(now) == "PM"
+      //     ? (int.parse(_timeString.substring(11, 13)) + 12).toString()
+      //     : _timeString.substring(11, 13);
     });
+  }
+
+  DateTime getDate(date, time) {
+    return DateTime(
+        int.parse(date.substring(0, 4)),
+        int.parse(date.substring(5, 7)),
+        int.parse(date.substring(8, 10)),
+        int.parse(time.substring(0, 2)),
+        int.parse(time.substring(3, 5)),
+        00);
   }
 
   String _formatDateTime(DateTime dateTime) {
