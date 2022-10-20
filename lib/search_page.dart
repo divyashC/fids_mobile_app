@@ -6,14 +6,33 @@ import 'dart:async';
 var api = "https://localhost:7178/api/FlightAPI";
 
 Future<List<Data>> fetchData() async {
-  final response = await http.get(Uri.parse(api));
-
-  if (response.statusCode == 200) {
-    List jsonResponse = json.decode(response.body);
+  var jsonResponse = [
+    {
+      "flightId": 0,
+      "flightNo": "No Flight",
+      "airline": "No Flight",
+      "origin": "No Flight",
+      "originIata": "No Flight",
+      "departureTime": "No Flight",
+      "departureTerminal": 0,
+      "destination": "No Flight",
+      "destinationIata": "No Flight",
+      "arrivalTime": "No Flight",
+      "arrivalTerminal": 0,
+      "flightDate": "No Flight",
+      "flightDuration": "No Flight",
+    }
+  ];
+  try {
+    final response = await http.get(Uri.parse(api));
+    if (response.statusCode == 200) {
+      List jsonResponse = json.decode(response.body);
+      return jsonResponse.map((data) => Data.fromJson(data)).toList();
+    }
+  } catch (e) {
     return jsonResponse.map((data) => Data.fromJson(data)).toList();
-  } else {
-    throw Exception('Unexpected error occured!');
   }
+  return jsonResponse.map((data) => Data.fromJson(data)).toList();
 }
 
 class Data {
@@ -154,6 +173,7 @@ class _SearchPageState extends State<SearchPage> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<Data>? data = snapshot.data;
+
                     if (data!.isEmpty) {
                       return AlertDialog(
                         actionsPadding:
@@ -194,6 +214,27 @@ class _SearchPageState extends State<SearchPage> {
                     return ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (BuildContext context, int index) {
+                          if (data[index].flightId == 0) {
+                            return Container(
+                              margin: const EdgeInsets.only(
+                                  left: 100, top: 40, right: 100, bottom: 550),
+                              padding: const EdgeInsets.only(
+                                  top: 30, left: 25, right: 20, bottom: 20),
+                              decoration: const BoxDecoration(
+                                color: Color.fromARGB(255, 243, 236, 232),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                              ),
+                              child: const Text(
+                                'No Flights Found',
+                                style: TextStyle(
+                                  fontSize: 19.0,
+                                  fontWeight: FontWeight.bold,
+                                  // italics text style
+                                ),
+                              ),
+                            );
+                          }
                           double listMargin =
                               index == data.length - 1 ? 220 : 50;
                           return Container(
