@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   height: 85,
                   child: Text(
-                      DateFormat('a').format(DateTime.now()) == "PM"
+                      DateFormat('a').format(DateTime.now()) == "AM"
                           ? (int.parse(_timeString.substring(11, 13)) + 12)
                               .toString()
                           : _timeString.substring(11, 13),
