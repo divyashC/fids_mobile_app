@@ -42,12 +42,12 @@ class _InfoPageState extends State<InfoPage> {
           backgroundColor: Colors.red,
         ),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.only(
-            top: 40,
-            left: 20,
-            right: 20,
-            bottom: 50,
-          ),
+          // padding: const EdgeInsets.only(
+          //   top: 20,
+          //   left: 20,
+          //   right: 20,
+          //   bottom: 20,
+          // ),
           child: ExpansionPanelList.radio(
             animationDuration: const Duration(milliseconds: 700),
             dividerColor: Colors.blue.shade100,
